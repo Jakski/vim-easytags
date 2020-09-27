@@ -62,8 +62,12 @@ if !exists('g:easytags_python_script')
   let g:easytags_python_script = expand('<sfile>:p:h') . '/../misc/easytags/highlight.py'
 endif
 
-" Make sure Exuberant Ctags >= 5.5 is installed.
-if !xolox#easytags#initialize('5.5')
+if !exists('g:easytags_ctags_required_version')
+  let g:easytags_ctags_required_version = '5.5'
+endif
+
+" Make sure Exuberant Ctags >= 5.5 or custom version is installed.
+if !xolox#easytags#initialize(g:easytags_ctags_required_version)
   " Did the user configure the plug-in to suppress the regular warning message?
   if !(exists('g:easytags_suppress_ctags_warning') && g:easytags_suppress_ctags_warning)
     " Explain to the user what went wrong:
